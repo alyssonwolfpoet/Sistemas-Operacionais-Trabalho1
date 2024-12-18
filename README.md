@@ -1,6 +1,3 @@
-Aqui está um exemplo de um arquivo `README.md` adequado para o seu projeto "Sistemas Operacionais - Trabalho 1", com base nos detalhes fornecidos:
-
-```markdown
 # Sistemas Operacionais - Trabalho 1
 
 ## Descrição
@@ -47,7 +44,7 @@ Para executar a simulação do algoritmo de escalonamento Round Robin, compile o
 gcc round_robin.c -o round_robin
 ./round_robin
 python gerar_graficos_round_robin.py
-```
+
 
 ### Questão 2: Jantar dos Filósofos
 O código em C `jantar_filosofos.c` implementa o protocolo para o problema do jantar dos filósofos. O script Python `gerar_graficos_impasses.py` gera os gráficos que mostram o número de impasses ocorridos em 1000 execuções.
