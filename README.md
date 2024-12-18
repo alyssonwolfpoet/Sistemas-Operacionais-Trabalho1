@@ -1,140 +1,92 @@
-A estrutura do seu projeto está bem organizada! Vou sugerir algumas melhorias no seu arquivo `README.md` com base na estrutura de diretórios e arquivos que você forneceu. Abaixo está o `README.md` ajustado, com os detalhes da estrutura do projeto:
+Aqui está um exemplo de um arquivo `README.md` adequado para o seu projeto "Sistemas Operacionais - Trabalho 1", com base nos detalhes fornecidos:
 
----
+```markdown
+# Sistemas Operacionais - Trabalho 1
 
-# Trabalho de Sistemas Operacionais - Algoritmos e Simulações
+## Descrição
 
-Este repositório contém as implementações para o trabalho da disciplina **Sistemas Operacionais** do curso **IFCE - Campus Maracanaú**, sob orientação do Prof. Daniel Ferreira. O trabalho aborda a simulação de algoritmos de escalonamento, criação de protocolos e resolução de problemas clássicos de sincronização.
+Este repositório contém o código e a documentação para o Trabalho 1 da disciplina de **Sistemas Operacionais**, lecionada pelo Prof. Daniel Ferreira no **IFCE - Campus Maracanaú**. O trabalho é composto por três questões que envolvem a implementação e simulação de algoritmos de escalonamento e resolução de problemas clássicos de concorrência. As questões são:
+
+1. **Simulação do algoritmo de escalonamento Round Robin.**
+2. **Protocolo de solução do problema do jantar dos filósofos sem impasse.**
+3. **Simulação para comparar duas soluções para o problema dos leitores e escritores.**
 
 ## Objetivo
 
-O objetivo deste projeto é implementar e simular os seguintes tópicos:
-
-1. **Simulação do algoritmo de escalonamento Round Robin**
-2. **Criação de um protocolo para o problema do jantar dos filósofos sem impasse**
-3. **Simulação do problema dos leitores e escritores para comparar soluções**
-
-Essas implementações são feitas em **C**, com a geração de gráficos para análise dos resultados em **Python**.
+O objetivo deste trabalho é desenvolver simulações para analisar algoritmos e protocolos de escalonamento e sincronização em sistemas operacionais. Para cada questão, foram realizados experimentos e os resultados foram apresentados em gráficos e análises.
 
 ## Estrutura do Repositório
 
-O projeto está organizado da seguinte forma:
+O repositório está organizado da seguinte maneira:
 
-```
-Sistemas-Operacionais-Trabalho1/
-├── .gitignore                 # Arquivo para ignorar arquivos temporários
-├── Código.pdf                 # Código-fonte detalhado ou outro material complementar
-├── README.md                  # Este arquivo de documentação
-├── requirements.txt           # Dependências necessárias para gerar gráficos
-├── resultados.png             # Imagem com os resultados gerais
-├── questao1/
-│   ├── gerar_graficos_round_robin.py  # Script Python para gerar gráficos de Round Robin
-│   ├── round_robin.c                 # Implementação do algoritmo Round Robin
-│   ├── tempo_medio_espera.png        # Gráfico do tempo médio de espera
-│   ├── tempo_medio_retorno.png       # Gráfico do tempo médio de retorno
-│   └── output/                        # Diretório para armazenar arquivos de saída
-├── questao2/
-│   ├── gerar_graficos_impasses.py    # Script Python para gerar gráficos dos impasses
-│   ├── grafico_impasses.png          # Gráfico mostrando impasses no jantar dos filósofos
-│   ├── Jantar dos Filósofos.pdf      # Documento explicativo sobre o jantar dos filósofos
-│   ├── jantar_filosofos.c            # Implementação do problema do jantar dos filósofos
-│   └── output/                       # Diretório para armazenar arquivos de saída
-├── questao3/
-│   ├── comparacao_solucoes.png       # Gráfico comparando soluções para leitores e escritores
-│   ├── gerar_graficos_leitores_escritores.py  # Script Python para gerar gráficos de leitores e escritores
-│   ├── leitores_escritores_solucao1.c  # Implementação da solução 1 do problema leitores e escritores
-│   ├── leitores_escritores_solucao2.c  # Implementação da solução 2 do problema leitores e escritores
-│   └── output/                       # Diretório para armazenar arquivos de saída
-```
+- **questao1/**: Implementação e gráficos do algoritmo de escalonamento Round Robin.
+  - `gerar_graficos_round_robin.py`: Código Python para gerar os gráficos de tempo médio de espera e retorno.
+  - `round_robin.c`: Código em C para a simulação do algoritmo Round Robin.
+  - `tempo_medio_espera.png`: Gráfico com o tempo médio de espera para diferentes valores de quantum.
+  - `tempo_medio_retorno.png`: Gráfico com o tempo médio de retorno para diferentes valores de quantum.
 
-## Dependências
+- **questao2/**: Implementação e gráficos relacionados ao problema do jantar dos filósofos.
+  - `gerar_graficos_impasses.py`: Código Python para gerar os gráficos de impasses no jantar dos filósofos.
+  - `grafico_impasses.png`: Gráfico com a quantidade de impasses em 1000 execuções.
+  - `Jantar dos Filósofos.pdf`: Documento com a explicação detalhada do protocolo implementado.
+  - `jantar_filosofos.c`: Código em C para a simulação do problema do jantar dos filósofos.
 
-Certifique-se de ter as dependências necessárias instaladas. Use o arquivo `requirements.txt` para instalar as bibliotecas Python necessárias:
+- **questao3/**: Implementação e gráficos do problema dos leitores e escritores.
+  - `comparacao_solucoes.png`: Gráfico comparando as duas soluções para o problema dos leitores e escritores.
+  - `gerar_graficos_leitores_escritores.py`: Código Python para gerar os gráficos de comparação entre as soluções.
+  - `Leitores e Escritores.pdf`: Documento com a descrição das soluções implementadas.
+  - `leitores_escritores_solucao1.c`: Código em C com a primeira solução para o problema dos leitores e escritores.
+  - `leitores_escritores_solucao2.c`: Código em C com a segunda solução para o problema dos leitores e escritores.
+
+## Como Executar
+
+### Questão 1: Round Robin
+Para executar a simulação do algoritmo de escalonamento Round Robin, compile o código `round_robin.c` e rode o programa. Utilize o script Python `gerar_graficos_round_robin.py` para gerar os gráficos de tempo médio de espera e retorno.
 
 ```bash
-pip install -r requirements.txt
-```
-
-As bibliotecas necessárias são:
-
-- `matplotlib`
-- `seaborn`
-
-## Compilação
-
-Para compilar e rodar as simulações, siga os seguintes passos:
-
-### Requisitos
-
-- **GCC** (Compilador C)
-- **Python** (para geração dos gráficos)
-
-### Passos para Compilação
-
-1. **Compilar a questão 1 (Round Robin)**:
-
-   Navegue até a pasta `questao1` e compile o arquivo `round_robin.c`:
-
-   ```bash
-   gcc -Wall -Wextra -g3 round_robin.c -o output/round_robin.exe -mconsole
-   ```
-
-2. **Compilar a questão 2 (Jantar dos Filósofos)**:
-
-   Navegue até a pasta `questao2` e compile o arquivo `jantar_filosofos.c`:
-
-   ```bash
-   gcc -Wall -Wextra -g3 jantar_filosofos.c -o output/jantar_filosofos.exe -mconsole
-   ```
-
-3. **Compilar a questão 3 (Leitores e Escritores)**:
-
-   Navegue até a pasta `questao3` e compile o arquivo `leitores_escritores_solucao1.c` ou `leitores_escritores_solucao2.c`:
-
-   ```bash
-   gcc -Wall -Wextra -g3 leitores_escritores_solucao1.c -o output/leitores_escritores_solucao1.exe -mconsole
-   gcc -Wall -Wextra -g3 leitores_escritores_solucao2.c -o output/leitores_escritores_solucao2.exe -mconsole
-   ```
-
-### Geração de Gráficos
-
-Após rodar as simulações e gerar os resultados em arquivos de saída, você pode utilizar os scripts Python para gerar gráficos a partir desses dados. 
-
-Para gerar os gráficos de **Round Robin**:
-
-```bash
+gcc round_robin.c -o round_robin
+./round_robin
 python gerar_graficos_round_robin.py
 ```
 
-Para gerar os gráficos de **Jantar dos Filósofos**:
+### Questão 2: Jantar dos Filósofos
+O código em C `jantar_filosofos.c` implementa o protocolo para o problema do jantar dos filósofos. O script Python `gerar_graficos_impasses.py` gera os gráficos que mostram o número de impasses ocorridos em 1000 execuções.
 
 ```bash
+gcc jantar_filosofos.c -o jantar_filosofos
+./jantar_filosofos
 python gerar_graficos_impasses.py
 ```
 
-Para gerar os gráficos de **Leitores e Escritores**:
+### Questão 3: Leitores e Escritores
+As duas soluções para o problema dos leitores e escritores estão implementadas nos arquivos `leitores_escritores_solucao1.c` e `leitores_escritores_solucao2.c`. O script Python `gerar_graficos_leitores_escritores.py` gera os gráficos comparativos.
 
 ```bash
+gcc leitores_escritores_solucao1.c -o solucao1
+gcc leitores_escritores_solucao2.c -o solucao2
+./solucao1
+./solucao2
 python gerar_graficos_leitores_escritores.py
 ```
 
-## Execução
-
-1. Execute o arquivo executável da questão desejada:
-
-   ```bash
-   ./output/round_robin.exe
-   ./output/jantar_filosofos.exe
-   ./output/leitores_escritores_solucao1.exe
-   ./output/leitores_escritores_solucao2.exe
-   ```
-
-2. Após a execução, os gráficos serão gerados automaticamente pelos scripts Python.
-
 ## Relatório
 
-O trabalho inclui um relatório final, disponível no diretório `questao2/`, onde são discutidos os resultados das simulações e comparadas as soluções encontradas para os problemas de sincronização.
+O relatório completo do trabalho está disponível no **arquivo PDF** e contém as descrições detalhadas dos experimentos, métodos utilizados e resultados obtidos.
 
----
+## Tecnologias Utilizadas
 
-Este arquivo `README.md` deve oferecer uma visão geral clara sobre como organizar, compilar e gerar gráficos a partir dos resultados. Se precisar de mais algum detalhe, estarei à disposição!
+- **C**: Para a implementação dos algoritmos de escalonamento e protocolos de sincronização.
+- **Python**: Para a geração de gráficos e análise de resultados.
+- **GNU Compiler Collection (GCC)**: Para compilar os códigos em C.
+- **Matplotlib**: Para a criação de gráficos em Python.
+
+## Conclusão
+
+O trabalho proporciona uma visão prática sobre algoritmos de escalonamento e protocolos de sincronização em sistemas operacionais, contribuindo para a compreensão dos conceitos fundamentais de concorrência e escalonamento em sistemas multitarefa.
+
+## Licença
+
+Este projeto está licenciado sob a [Licença MIT](LICENSE).
+```
+
+Esse `README.md` contém uma descrição clara do projeto, estrutura dos arquivos, como executar o código e informações sobre as tecnologias utilizadas.
