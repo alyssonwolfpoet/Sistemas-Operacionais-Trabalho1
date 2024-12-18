@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 typedef struct {
     int id;
@@ -15,6 +16,7 @@ void escalonamento_round_robin(Processo processos[], int n, int quantum) {
     int *fila = (int *)malloc(n * sizeof(int));
     int inicio = 0, fim = 0;
 
+    // Inicialização dos processos
     for (int i = 0; i < n; i++) {
         fila[fim++] = i;
         processos[i].tempo_restante = processos[i].burst_time;
@@ -22,18 +24,18 @@ void escalonamento_round_robin(Processo processos[], int n, int quantum) {
         processos[i].tempo_retorno = 0;
     }
 
+    // Algoritmo Round Robin
     while (executado < n) {
         int i = fila[inicio++];
         if (inicio == n) inicio = 0;
-
+        
         if (processos[i].tempo_restante > quantum) {
-            tempo_corrente += quantum + 1; // Incluindo tempo de mudança de contexto
+            tempo_corrente += quantum + 1;  // Incluindo tempo de mudança de contexto
             processos[i].tempo_restante -= quantum;
-
+            
             for (int j = inicio; j != fim; j = (j + 1) % n) {
                 processos[fila[j]].tempo_espera += quantum + 1;
             }
-
             fila[fim++] = i;
             if (fim == n) fim = 0;
         } else {
@@ -41,7 +43,6 @@ void escalonamento_round_robin(Processo processos[], int n, int quantum) {
             for (int j = inicio; j != fim; j = (j + 1) % n) {
                 processos[fila[j]].tempo_espera += processos[i].tempo_restante + 1;
             }
-
             processos[i].tempo_retorno = tempo_corrente;
             processos[i].tempo_restante = 0;
             executado++;
@@ -66,30 +67,59 @@ Processo* gerar_processos(int n, int intervalo1[], int intervalo2[]) {
     return processos;
 }
 
-void calcular_metricas(Processo processos[], int n) {
-    double tempo_medio_espera = 0, tempo_medio_retorno = 0;
+void calcular_metricas(Processo processos[], int n, FILE *saida) {
+    double tempo_medio_espera = 0.0;
+    double tempo_medio_retorno = 0.0;
+    double desvio_espera = 0.0;
+    double desvio_retorno = 0.0;
+
+    // Cálculo do tempo médio de espera e tempo médio de retorno
     for (int i = 0; i < n; i++) {
         tempo_medio_espera += processos[i].tempo_espera;
         tempo_medio_retorno += processos[i].tempo_retorno;
     }
-
+    
     tempo_medio_espera /= n;
     tempo_medio_retorno /= n;
 
-    printf("Tempo médio de espera: %.2f\n", tempo_medio_espera);
-    printf("Tempo médio de retorno: %.2f\n", tempo_medio_retorno);
+    // Cálculo do desvio padrão para tempo de espera
+    for (int i = 0; i < n; i++) {
+        desvio_espera += pow(processos[i].tempo_espera - tempo_medio_espera, 2);
+        desvio_retorno += pow(processos[i].tempo_retorno - tempo_medio_retorno, 2);
+    }
+
+    desvio_espera = sqrt(desvio_espera / n);
+    desvio_retorno = sqrt(desvio_retorno / n);
+
+    // Impressão dos resultados no arquivo
+    fprintf(saida, "%d %.2f %.2f %.2f %.2f\n", n, tempo_medio_espera, desvio_espera, tempo_medio_retorno, desvio_retorno);
 }
 
 int main() {
-    int n = 5;
-    int intervalo1[] = {5, 10};
-    int intervalo2[] = {10, 20};
+    int n = 5;  // Número de processos
+    int intervalo1[] = {10, 20};  // Intervalo para burst_time 1
+    int intervalo2[] = {30, 40};  // Intervalo para burst_time 2
+    int quantum[] = {1, 2, 4, 8}; // Quantums a testar
 
-    Processo* processos = gerar_processos(n, intervalo1, intervalo2);
-    int quantum = 4;
-    escalonamento_round_robin(processos, n, quantum);
-    calcular_metricas(processos, n);
+    FILE *saida = fopen("resultados.txt", "w");
 
+    if (!saida) {
+        printf("Erro ao abrir arquivo de saída.\n");
+        return 1;
+    }
+
+    // Gerar os processos
+    Processo *processos = gerar_processos(n, intervalo1, intervalo2);
+
+    for (int i = 0; i < 4; i++) {
+        printf("Executando Round Robin com quantum = %d\n", quantum[i]);
+        escalonamento_round_robin(processos, n, quantum[i]);
+        calcular_metricas(processos, n, saida);
+    }
+
+    fclose(saida);
     free(processos);
+
+    printf("Resultados salvos em 'resultados.txt'.\n");
     return 0;
 }
